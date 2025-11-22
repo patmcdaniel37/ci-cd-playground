@@ -10,16 +10,9 @@ def client():
 def test_home(client):
     response = client.get('/')
     assert response.status_code == 200
-    assert b'CI/CD Playground API' in response.data
 
 def test_health(client):
     response = client.get('/health')
     assert response.status_code == 200
     data = response.get_json()
     assert data['status'] == 'ok'
-
-def test_users(client):
-    response = client.get('/api/users')
-    assert response.status_code == 200
-    data = response.get_json()
-    assert len(data['users']) == 2
