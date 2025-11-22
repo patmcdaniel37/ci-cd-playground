@@ -32,6 +32,9 @@ jobs:
           cd backend
           pip install -r requirements.txt
 
+      - name: Add backend to PYTHONPATH
+        run: echo "PYTHONPATH=$(pwd)/backend" >> $GITHUB_ENV
+
       - name: Lint with Pylint
         run: |
           cd backend
