@@ -1,6 +1,9 @@
+"""
+CI/CD Playground API - Main Flask Application
+"""
+import os
 from flask import Flask, jsonify
 from flask_cors import CORS
-import os
 
 app = Flask(__name__)
 CORS(app)
@@ -10,6 +13,7 @@ ENVIRONMENT = os.getenv('ENVIRONMENT', 'development')
 
 @app.route('/')
 def home():
+    """Return API information and status."""
     return jsonify({
         'message': 'CI/CD Playground API',
         'version': VERSION,
@@ -19,10 +23,12 @@ def home():
 
 @app.route('/health')
 def health():
+    """Health check endpoint."""
     return jsonify({'status': 'ok', 'version': VERSION}), 200
 
 @app.route('/api/users')
 def get_users():
+    """Get list of users."""
     return jsonify({
         'users': [
             {'id': 1, 'name': 'Alice', 'email': 'alice@example.com'},
@@ -32,6 +38,7 @@ def get_users():
 
 @app.route('/api/status')
 def status():
+    """Get system status."""
     return jsonify({
         'database': 'connected',
         'cache': 'active',
@@ -39,4 +46,4 @@ def status():
     })
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5100, debug=(ENVIRONMENT == 'development'))
+    app.run(host='0.0.0.0', port=5000, debug=ENVIRONMENT == 'development')
