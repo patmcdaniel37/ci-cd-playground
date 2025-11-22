@@ -1,0 +1,9 @@
+{
+  "short_name": "CI/CD Playground",
+  "name": "CI/CD Playground Application",
+  "icons": [],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff"
+}

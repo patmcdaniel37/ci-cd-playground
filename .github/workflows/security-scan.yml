@@ -1,0 +1,26 @@
+name: Security Scan
+
+on:
+  schedule:
+    - cron: '0 0 * * 0'  # Weekly on Sunday
+  workflow_dispatch:
+
+jobs:
+  dependency-scan:
+    name: Dependency Scan
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Run Safety Check (Python)
+        run: |
+          cd backend
+          pip install safety
+          safety check --json
+
+      - name: Run npm audit (Node.js)
+        run: |
+          cd frontend
+          npm audit --audit-level=moderate
