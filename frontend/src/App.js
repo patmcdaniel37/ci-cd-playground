@@ -5,8 +5,7 @@ function App() {
   const [apiData, setApiData] = useState(null);
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
-  
-  // CHANGED: Use port 5100
+  //Using 5100 because 5000 conflicts with another app
   const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5100';
 
   useEffect(() => {
@@ -14,7 +13,7 @@ function App() {
     fetch(`${API_URL}/`)
       .then(res => res.json())
       .then(data => setApiData(data))
-      .catch(err => console.error('API Error:', err));
+      .catch(err => console.error(err));
 
     // Fetch users
     fetch(`${API_URL}/api/users`)
@@ -23,7 +22,7 @@ function App() {
         setUsers(data.users);
         setLoading(false);
       })
-      .catch(err => console.error('Users Error:', err));
+      .catch(err => console.error(err));
   }, [API_URL]);
 
   return (

@@ -4,7 +4,7 @@ on:
   push:
     branches: [ main, develop ]
   pull_request:
-    branches: [ main ]
+    branches: [ main, develop ]
 
 jobs:
   # Backend Tests
@@ -32,9 +32,6 @@ jobs:
           cd backend
           pip install -r requirements.txt
 
-      - name: Add backend to PYTHONPATH
-        run: echo "PYTHONPATH=$(pwd)/backend" >> $GITHUB_ENV
-
       - name: Lint with Pylint
         run: |
           cd backend
@@ -57,50 +54,35 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # Checkout code
       - name: Checkout Code
         uses: actions/checkout@v3
 
-      # Set up Node.js
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
           node-version: '18'
 
-      # Check Node and npm versions (debug)
-      - name: Check Node/NPM version
-        run: |
-          node -v
-          npm -v
-
-      # Cache Node Modules
       - name: Cache Node Modules
         uses: actions/cache@v3
         with:
           path: frontend/node_modules
           key: ${{ runner.os }}-node-${{ hashFiles('frontend/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-
 
-      # Install dependencies including devDependencies
       - name: Install Dependencies
         run: |
           cd frontend
-          npm install --legacy-peer-deps
+          npm ci
 
-      # Lint React/JSX files using npx with explicit config
       - name: Lint
         run: |
           cd frontend
-          npx eslint src/ --ext .js,.jsx --config .eslintrc.json || true
+          npm run lint
 
-      # Run tests with coverage
       - name: Run Tests
         run: |
           cd frontend
           npm test -- --coverage
 
-      # Upload coverage to Codecov
       - name: Upload Coverage
         uses: codecov/codecov-action@v3
         with:
