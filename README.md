@@ -1,63 +1,39 @@
-<div align="center">
+# CI/CD Playground
 
-# 🚀 CI/CD Playground
+![CI Pipeline](https://github.com/patmcdaniel37/ci-cd-playground/actions/workflows/ci.yml/badge.svg)
 
-![CI Pipeline](https://github.com/yourusername/ci-cd-playground/actions/workflows/ci.yml/badge.svg)
-![Deploy Staging](https://github.com/yourusername/ci-cd-playground/actions/workflows/cd-staging.yml/badge.svg)
-![Deploy Production](https://github.com/yourusername/ci-cd-playground/actions/workflows/cd-production.yml/badge.svg)
-![Security Scan](https://github.com/yourusername/ci-cd-playground/actions/workflows/security-scan.yml/badge.svg)
+✅ **CI/CD pipeline working!**
 
-**A demonstration project showcasing modern CI/CD practices with automated testing, deployment, and monitoring**
+A hands-on project demonstrating CI/CD pipeline implementation with GitHub Actions.
 
-[View Demo](#) • [Documentation](docs/) • [Contributing](CONTRIBUTING.md)
+## What This Project Demonstrates
 
-</div>
+**CI/CD Skills:**
+- ✅ GitHub Actions workflow creation
+- ✅ Automated testing (Pytest + Jest)
+- ✅ Multi-job pipeline configuration
+- ✅ Backend and frontend integration
+- ✅ Build status monitoring
 
----
+## Tech Stack
 
-## 📋 Overview
+- **Backend**: Python Flask
+- **Frontend**: React
+- **CI/CD**: GitHub Actions
+- **Testing**: Pytest (Backend), Jest (Frontend)
 
-This project demonstrates a complete CI/CD pipeline for a full-stack application, including:
-- Automated testing and code quality checks
-- Multi-environment deployments (staging & production)
-- Docker containerization
-- Security scanning
-- Automated releases
-- Health monitoring
+## Pipeline Status
 
-## 🏗️ Architecture
+- Backend Tests: ✅ Passing
+- Frontend Tests: ✅ Passing
 
-### Application Stack
-- **Backend**: Python Flask REST API
-- **Frontend**: React.js application
-- **Database**: SQLite (demo purposes)
-- **Containerization**: Docker
-
-### CI/CD Stack
-- **CI/CD Platform**: GitHub Actions
-- **Container Registry**: Docker Hub
-- **Deployment**: Heroku/Render (free tiers)
-- **Monitoring**: UptimeRobot
-
-## 🚀 Quick Start
-
-### Prerequisites
-- Docker & Docker Compose
-- Python 3.11+
-- Node.js 18+
-
-### Local Development
-
-**Using Docker Compose:**
-```bash
-docker-compose up --build
-```
+## Local Development
 
 **Backend:**
 ```bash
 cd backend
 pip install -r requirements.txt
-python -m flask run
+python app/main.py
 ```
 
 **Frontend:**
@@ -67,128 +43,12 @@ npm install
 npm start
 ```
 
-## 🔄 CI/CD Pipeline
+## CI/CD Pipeline
 
-### Continuous Integration (CI)
-Triggered on: Push to main/develop, Pull Requests
+The pipeline automatically:
+1. Runs on every push to main
+2. Tests backend with Pytest
+3. Tests frontend with Jest
+4. Reports build status via badge
 
-**Pipeline Steps:**
-1. **Code Checkout** - Clone repository
-2. **Dependency Caching** - Cache Python/Node dependencies
-3. **Linting** - Run Pylint (Backend) & ESLint (Frontend)
-4. **Unit Tests** - Run Pytest & Jest with coverage
-5. **Security Scan** - Trivy vulnerability scanning
-6. **Docker Build** - Test container builds
-7. **Coverage Report** - Upload to Codecov
-
-### Continuous Deployment (CD)
-
-**Staging Deployment:**
-- Trigger: Push to `develop` branch
-- Environment: Staging
-- Auto-deploys on successful CI
-
-**Production Deployment:**
-- Trigger: Push to `main` branch or version tag
-- Environment: Production
-- Requires manual approval
-- Creates GitHub release
-
-### Pipeline Diagram
-![Pipeline Flow](docs/images/pipeline-diagram.png)
-
-## 🧪 Testing
-
-**Backend Tests:**
-```bash
-cd backend
-pytest tests/ -v --cov=app
-```
-
-**Frontend Tests:**
-```bash
-cd frontend
-npm test -- --coverage
-```
-
-**Run All Tests:**
-```bash
-./scripts/test.sh
-```
-
-## 📦 Docker
-
-**Build Images:**
-```bash
-docker build -t cicd-playground-backend ./backend
-docker build -t cicd-playground-frontend ./frontend
-```
-
-**Run with Docker Compose:**
-```bash
-docker-compose up
-```
-
-## 🔒 Security
-
-- **Dependency Scanning**: Weekly automated scans
-- **Container Scanning**: Trivy on every build
-- **Secret Management**: GitHub Secrets
-- **HTTPS**: Enforced in production
-
-## 📊 Monitoring
-
-- **Health Checks**: `/health` endpoint
-- **Uptime Monitoring**: UptimeRobot (99.9% SLA)
-- **Logs**: GitHub Actions logs retained for 90 days
-
-## 🌍 Environments
-
-| Environment | URL | Branch | Status |
-|-------------|-----|--------|--------|
-| Staging | [staging-url] | develop | ![Staging](badge) |
-| Production | [prod-url] | main | ![Production](badge) |
-
-## 📁 Project Structure
-```
-ci-cd-playground/
-├── .github/workflows/     # CI/CD pipelines
-├── backend/              # Python Flask API
-├── frontend/             # React application
-├── infrastructure/       # Docker configs
-├── scripts/              # Automation scripts
-└── docs/                 # Documentation
-```
-
-## 🛠️ Technologies
-
-**Backend:**
-- Python 3.11, Flask, Pytest, Pylint
-
-**Frontend:**
-- React 18, Jest, ESLint
-
-**DevOps:**
-- GitHub Actions, Docker, Docker Compose
-
-**Security:**
-- Trivy, Safety, npm audit
-
-## 📈 Metrics
-
-- **Test Coverage**: 85%+
-- **Build Time**: ~3 minutes
-- **Deploy Time**: ~2 minutes
-- **Uptime**: 99.9%
-
-## 🤝 Contributing
-
-See [CONTRIBUTING.md](CONTRIBUTING.md)
-
-## 📄 License
-
-MIT License - see [LICENSE](LICENSE)
-
-## 📧 Contact
-
-Your Name - [GitHub](https://github.com/yourusername)
+**Green badge = All tests passing!** 🎉
