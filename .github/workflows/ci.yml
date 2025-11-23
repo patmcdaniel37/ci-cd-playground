@@ -86,11 +86,11 @@ jobs:
           cd frontend
           npm install
 
-      # Lint React/JSX files using npx
+      # Lint React/JSX files using npx with explicit config
       - name: Lint
         run: |
           cd frontend
-          npx eslint src/ --ext .js,.jsx
+          npx eslint src/ --ext .js,.jsx --config .eslintrc.json
 
       # Run tests with coverage
       - name: Run Tests
