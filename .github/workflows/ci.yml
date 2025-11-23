@@ -57,40 +57,48 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      # Checkout code
       - name: Checkout Code
         uses: actions/checkout@v3
 
+      # Set up Node.js
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
           node-version: '18'
 
+      # Check Node and npm versions (debug)
       - name: Check Node/NPM version
         run: |
           node -v
           npm -v
 
+      # Cache Node Modules
       - name: Cache Node Modules
         uses: actions/cache@v3
         with:
           path: frontend/node_modules
           key: ${{ runner.os }}-node-${{ hashFiles('frontend/package-lock.json') }}
 
+      # Install dependencies including devDependencies
       - name: Install Dependencies
         run: |
           cd frontend
           npm install
 
+      # Lint React/JSX files using npx
       - name: Lint
         run: |
           cd frontend
           npx eslint src/ --ext .js,.jsx
 
+      # Run tests with coverage
       - name: Run Tests
         run: |
           cd frontend
           npm test -- --coverage
 
+      # Upload coverage to Codecov
       - name: Upload Coverage
         uses: codecov/codecov-action@v3
         with:
