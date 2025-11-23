@@ -84,7 +84,7 @@ jobs:
       - name: Lint
         run: |
           cd frontend
-          npm run lint
+          npx eslint src/ --ext .js,.jsx
 
       - name: Run Tests
         run: |
