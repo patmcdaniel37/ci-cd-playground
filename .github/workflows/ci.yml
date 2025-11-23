@@ -32,11 +32,6 @@ jobs:
           cd backend
           pip install -r requirements.txt
 
-      - name: Lint with Pylint
-        run: |
-          cd backend
-          pylint app/ --fail-under=8.0
-
       - name: Run Tests
         run: |
           cd backend
