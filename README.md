@@ -72,6 +72,81 @@ This setup ensures code quality through automated testing before any deployment,
 - **CI/CD**: GitHub Actions
 - **Testing**: Pytest (Backend), Jest (Frontend)
 
+## 🏗 Application Architecture
+
+### Architecture Diagram
+
+```mermaid
+graph TD
+    subgraph Client
+        U[User Browser]
+    end
+
+    subgraph Frontend
+        FE[React SPA<br/>Port 3000]
+    end
+
+    subgraph Backend
+        BE[Flask API<br/>Port 5000]
+    end
+
+    subgraph Docker
+        DC1[Frontend Container]
+        DC2[Backend Container]
+    end
+
+    subgraph CI_CD[CI/CD Platform (GitHub Actions)]
+        CI[Build & Test Jobs]
+        IMG[Docker Images<br/>(Backend & Frontend)]
+    end
+
+    subgraph External
+        DH[(Docker Hub)]
+        CC[(Codecov)]
+    end
+
+    U --> FE
+    FE -->|HTTP/JSON| BE
+
+    DC1 --- FE
+    DC2 --- BE
+
+    CI --> IMG --> DH
+    CI --> CC
+
+    style FE fill:#e3f2fd,stroke:#1e88e5
+    style BE fill:#e8f5e9,stroke:#43a047
+    style CI_CD fill:#fff3e0,stroke:#fb8c00
+    style Docker fill:#f3e5f5,stroke:#8e24aa
+    style External fill:#ede7f6,stroke:#5e35b1
+```
+
+### How the Application Works
+
+- **User Interaction**:  
+  - A user accesses the React frontend from their browser on `http://localhost:3000`.
+  - The React app renders a simple UI showing API status and a list of users.
+
+- **Frontend → Backend Communication**:  
+  - The React app calls the Flask API over HTTP (JSON) using `REACT_APP_API_URL` (default `http://localhost:5100`).
+  - It hits endpoints like `/`, `/health`, and `/api/users` to fetch status and mock user data.
+
+- **Backend Responsibilities**:  
+  - Exposes simple JSON endpoints for health, status, and user data.
+  - Reads environment variables such as `APP_VERSION` and `ENVIRONMENT` to surface runtime metadata.
+
+- **Containerization**:  
+  - Both frontend and backend are packaged into separate Docker images.
+  - `docker-compose.yml` wires them together so the frontend can talk to the backend via the internal Docker network.
+
+- **CI/CD Integration**:  
+  - GitHub Actions runs tests for both services on each push/PR.
+  - Successful runs build and push Docker images to Docker Hub and upload coverage reports to Codecov.
+
+This architecture keeps the frontend and backend cleanly separated, fully containerized, and wired into an automated CI/CD pipeline that validates changes before images are built and published.
+
+## Pipeline Status
+
 ## Pipeline Status
 
 - Backend Tests: ✅ Passing
