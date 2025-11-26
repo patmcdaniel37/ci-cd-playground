@@ -95,14 +95,14 @@ graph TD
         DC2[Backend Container]
     end
 
-    subgraph CI_CD[CI/CD Platform (GitHub Actions)]
+    subgraph CI_CD[CI/CD Platform &#40GitHub Actions&#41]
         CI[Build & Test Jobs]
-        IMG[Docker Images<br/>(Backend & Frontend)]
+        IMG[Docker Images<br/>&#40Backend & Frontend&#41]
     end
 
     subgraph External
-        DH[(Docker Hub)]
-        CC[(Codecov)]
+        DH[&#40Docker Hub&#41]
+        CC[&#40Codecov&#41]
     end
 
     U --> FE
